@@ -6,13 +6,13 @@ namespace JabbR.ContentProviders
 {
     public class ExpertTfsChunkContentProvider : CollapsibleContentProvider
     {
-        private static readonly string _iframedMeetingFormat = "<iframe src=\"{0}\" width=\"700\" height=\"400\"></iframe>";
+        private static readonly string _iframedMeetingFormat = "<div id=\"{0}\"></div><script language=\"javascript\">$.get('{1}',null,function(result) {$(\"#{0}\").html(result); },'html');</script>";
 
         protected override Task<ContentProviderResult> GetCollapsibleContent(ContentProviderHttpRequest request)
         {
             return TaskAsyncHelper.FromResult(new ContentProviderResult()
             {
-                Content = String.Format(_iframedMeetingFormat, request.RequestUri.AbsoluteUri),
+                Content = String.Format(_iframedMeetingFormat, "hubot" + Guid.NewGuid().ToString().Replace("-", ""), request.RequestUri.AbsoluteUri),
                 Title = "Info:"
             });
         }
