@@ -6,7 +6,7 @@ namespace JabbR.ContentProviders
 {
     public class ExpertTfsChunkContentProvider : CollapsibleContentProvider
     {
-        private static readonly string _iframedMeetingFormat = "<div id=\"{0}\"></div><script language=\"javascript\">$.get('{1}',null,function(result) {{$(\"#{0}\").html(result); }},'html');</script>";
+        private static readonly string _iframedMeetingFormat = "<div id=\"{0}\"></div><script language=\"javascript\">jQuery.support.cors = true;$.get('{1}',null,function(result) {{$(\"#{0}\").html(result); }},'html');</script>";
 
         protected override Task<ContentProviderResult> GetCollapsibleContent(ContentProviderHttpRequest request)
         {
